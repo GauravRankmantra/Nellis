@@ -21,8 +21,8 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="bg-gradient-to-r from-slate-800 via-blue-900 to-slate-800 text-white sticky top-0 z-50 shadow border-b border-blue-800/30">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav className="bg-gradient-to-r font-ralewayM  from-slate-900 via-blue-900 to-red-900 text-white sticky top-0 z-50 shadow border-b border-blue-800/30">
+      <div className=" mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-20">
           <div className="flex items-center">
             <Link to="/" className="flex items-center group">
@@ -40,7 +40,7 @@ const Navbar = () => {
               <Link
                 key={item.name}
                 to={item.href}
-                className={`px-4 py-2 text-sm font-medium transition-all duration-300 rounded-lg hover:bg-white/10 hover:text-red-400 relative group ${
+                className={`px-4 py-2 text-center text-sm font-medium transition-all duration-300 rounded-lg hover:bg-white/10 hover:text-red-400 relative group ${
                   location.pathname === item.href
                     ? 'text-red-400 bg-white/10'
                     : 'text-white'
