@@ -10,7 +10,7 @@ const Hero = () => {
       <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 via-transparent to-red-900/80"></div>
       
       {/* Animated Background Elements */}
-      <div className="absolute top-20 left-10 w-32 h-32 bg-blue-500/10 rounded-full blur-xl animate-pulse"></div>
+      <div className="absolute top-20  left-10 w-32 h-32 bg-blue-500/10 rounded-full blur-xl animate-pulse"></div>
       <div className="absolute bottom-20 right-10 w-40 h-40 bg-red-500/10 rounded-full blur-xl animate-pulse delay-1000"></div>
       
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
