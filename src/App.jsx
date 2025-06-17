@@ -15,6 +15,7 @@ import Community from './pages/Community';
 import Contact from './pages/Contact';
 
 function App() {
+  ////////////////
   return (
     <Router>
       <div className="min-h-screen bg-gray-50 font-ralewayM">
