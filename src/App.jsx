@@ -1,18 +1,19 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
-import Home from './pages/Home';
-import WeeklySpecials from './pages/WeeklySpecials';
-import Inventory from './pages/Inventory';
-import SpecialOffers from './pages/SpecialOffers';
-import Financing from './pages/Financing';
-import ServiceParts from './pages/ServiceParts';
-import DealerDirectory from './pages/DealerDirectory';
-import DealerProfile from './pages/DealerProfile';
-import AutoBusinesses from './pages/AutoBusinesses';
-import Community from './pages/Community';
-import Contact from './pages/Contact';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import Home from "./pages/Home";
+import WeeklySpecials from "./pages/WeeklySpecials";
+import Inventory from "./pages/Inventory";
+import SpecialOffers from "./pages/SpecialOffers";
+import Financing from "./pages/Financing";
+import ServiceParts from "./pages/ServiceParts";
+import DealerDirectory from "./pages/DealerDirectory";
+import DealerProfile from "./pages/DealerProfile";
+import AutoBusinesses from "./pages/AutoBusinesses";
+import Community from "./pages/Community";
+import Contact from "./pages/Contact";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
@@ -33,6 +34,22 @@ function App() {
             <Route path="/community" element={<Community />} />
             <Route path="/contact" element={<Contact />} />
           </Routes>
+          <Toaster
+            position="top-right"
+            toastOptions={{
+              duration: 4000,
+              style: {
+                background: "#363636",
+                color: "#fff",
+              },
+              success: {
+                duration: 3000,
+                theme: {
+                  primary: "#4aed88",
+                },
+              },
+            }}
+          />
         </main>
         <Footer />
       </div>
