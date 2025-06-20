@@ -40,6 +40,7 @@ const SpecialOffers = () => {
       })
       .catch((error) => {
         toast.error(error?.message);
+        setLoading(false);
       });
   }, []);
 
