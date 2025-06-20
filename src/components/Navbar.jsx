@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Car } from 'lucide-react';
 import logo from "../assets/logo.png"
@@ -6,6 +6,12 @@ import logo from "../assets/logo.png"
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [pathname]);
 
   const navigation = [
     { name: 'Home', href: '/' },
@@ -40,11 +46,10 @@ const Navbar = () => {
               <Link
                 key={item.name}
                 to={item.href}
-                className={`px-4 py-2 text-center text-sm font-medium transition-all duration-300 rounded-lg hover:bg-white/10 hover:text-red-400 relative group ${
-                  location.pathname === item.href
-                    ? 'text-red-400 bg-white/10'
-                    : 'text-white'
-                }`}
+                className={`px-4 py-2 text-center text-sm font-medium transition-all duration-300 rounded-lg hover:bg-white/10 hover:text-red-400 relative group ${location.pathname === item.href
+                  ? 'text-red-400 bg-white/10'
+                  : 'text-white'
+                  }`}
               >
                 {item.name}
                 {location.pathname === item.href && (
@@ -74,11 +79,10 @@ const Navbar = () => {
               <Link
                 key={item.name}
                 to={item.href}
-                className={`block px-4 py-3 text-base font-medium transition-all duration-300 hover:text-red-400 hover:bg-white/10 rounded-lg ${
-                  location.pathname === item.href
-                    ? 'text-red-400 bg-white/10'
-                    : 'text-white'
-                }`}
+                className={`block px-4 py-3 text-base font-medium transition-all duration-300 hover:text-red-400 hover:bg-white/10 rounded-lg ${location.pathname === item.href
+                  ? 'text-red-400 bg-white/10'
+                  : 'text-white'
+                  }`}
                 onClick={() => setIsOpen(false)}
               >
                 {item.name}

@@ -16,6 +16,7 @@ import Contact from "./pages/Contact";
 import { Toaster } from "react-hot-toast";
 
 function App() {
+ 
   return (
     <Router>
       <div className="min-h-screen bg-gray-50 font-ralewayM">

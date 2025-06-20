@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Hero from "../components/Hero";
 import { Link } from "react-router-dom";
 import {
@@ -15,6 +15,8 @@ import {
 import CarLogo from "../components/CarLogo";
 
 const Home = () => {
+
+
   return (
     <div>
       <Hero />
