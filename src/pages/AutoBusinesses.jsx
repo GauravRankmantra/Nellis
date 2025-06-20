@@ -53,15 +53,11 @@ const AutoBusinesses = () => {
 
   /////////// filter data //////////////
 
-  console.log('Businesses data :', businesses);
 
   const filteredBusinesses = selectedCategory
     ? businesses?.data?.filter(business => business?.type === selectedCategory)
     : businesses;
 
-  console.log("selected category", selectedCategory);
-
-  console.log('Filter Data :', filteredBusinesses);
 
   return (
     <div className="min-h-screen bg-gray-50">
