@@ -91,6 +91,14 @@ const AutoBusinesses = () => {
               <option value="Tire Shop">Tire Shop</option>
               <option value="Parts Store">Parts Store</option>
               <option value="Auto Repair">Auto Repair</option>
+              <option value="Service Center">Service Center</option>
+              <option value="Repair Shop">Repair Shop</option>
+              <option value="Detailing">Detailing</option>
+              <option value="Body Show">Body Show</option>
+              <option value="Towing Service">Towing Service</option>
+              <option value="Insurance">Insurance</option>
+              <option value="Financing">Financing</option>
+              <option value="Other">Other</option>
 
             </select>
           </div>
