@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react"; // Added useState
 import Hero from "../components/Hero";
 import { Link } from "react-router-dom";
 import {
@@ -13,9 +13,28 @@ import {
   CheckCircle,
 } from "lucide-react";
 import CarLogo from "../components/CarLogo";
+import axios from "axios"; // Added axios
+import toast from "react-hot-toast"; // Added toast
 
 const Home = () => {
+  // State for featured dealerships
+  const [featuredDealers, setFeaturedDealers] = useState([]);
+  const [loading, setLoading] = useState(true);
 
+  // Fetch featured dealerships data
+  useEffect(() => {
+    setLoading(true);
+    axios
+      .get("https://backend-nellis.onrender.com/api/v1/dealerships")
+      .then((response) => {
+        setFeaturedDealers(response.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setLoading(false);
+        toast.error(error?.message || "Failed to fetch featured dealers");
+      });
+  }, []);
 
   return (
     <div>
@@ -24,17 +43,20 @@ const Home = () => {
       <section>
         <CarLogo />
       </section>
+
       {/* Features Section */}
-      <section className="py-20 border-t  bg-gradient-to-b from-white to-gray-50">
+      <section className="py-20 border-t bg-gradient-to-b from-white to-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Why Choose Nellis Boulevard Auto Dealers
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              We're your trusted partner for quality used vehicles along Las
-              Vegas' premier auto corridor.
-            </p>
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold text-gray-900 mb-6">
+                Why Choose Dealer Directory Auto Dealers
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl leading-relaxed mx-auto">
+                We're your trusted partner for quality used vehicles along Las
+                Vegas' premier auto corridor.
+              </p>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -136,114 +158,63 @@ const Home = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-            <div className="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
-              <div className="relative overflow-hidden">
-                <img
-                  src="https://images.pexels.com/photos/1077785/pexels-photo-1077785.jpeg"
-                  alt="Vegas Premier Auto"
-                  className="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-              </div>
-              <div className="p-8">
-                <h3 className="text-2xl font-semibold mb-3 text-gray-900">
-                  Vegas Premier Auto
-                </h3>
-                <p className="text-gray-600 mb-4 leading-relaxed">
-                  Family-owned dealership with 20+ years of experience serving
-                  Las Vegas
-                </p>
-                <div className="flex items-center mb-6">
-                  <div className="flex text-yellow-400">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="h-5 w-5 fill-current" />
-                    ))}
+            {loading ? (
+              <>
+                {[1, 2, 3].map((index) => (
+                  <div
+                    className="w-full p-4 border rounded-lg shadow animate-pulse bg-white"
+                    key={index}
+                  >
+                    <div className="h-56 bg-gray-200 rounded w-full shimmer"></div>
+                    <div className="mt-4 space-y-2">
+                      <div className="h-4 bg-gray-200 rounded w-3/4 shimmer"></div>
+                      <div className="h-4 bg-gray-200 rounded w-1/2 shimmer"></div>
+                      <div className="h-4 bg-gray-200 rounded w-full shimmer"></div>
+                    </div>
                   </div>
-                  <span className="ml-3 text-sm text-gray-600 font-medium">
-                    4.8 (124 reviews)
-                  </span>
-                </div>
-                <Link
-                  to="/dealer/1"
-                  className="inline-flex items-center text-blue-600 hover:text-blue-800 font-semibold group-hover:translate-x-1 transition-all duration-300"
+                ))}
+              </>
+            ) : (
+              featuredDealers?.data?.slice(0, 3).map((dealer) => (
+                <div
+                  key={dealer?._id}
+                  className="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2"
                 >
-                  View Details <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </div>
-            </div>
-
-            <div className="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
-              <div className="relative overflow-hidden">
-                <img
-                  src="https://images.pexels.com/photos/193999/pexels-photo-193999.jpeg"
-                  alt="Thunderbird Motors"
-                  className="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-              </div>
-              <div className="p-8">
-                <h3 className="text-2xl font-semibold mb-3 text-gray-900">
-                  Thunderbird Motors
-                </h3>
-                <p className="text-gray-600 mb-4 leading-relaxed">
-                  Proud to serve military families with honor and exceptional
-                  service
-                </p>
-                <div className="flex items-center mb-6">
-                  <div className="flex text-yellow-400">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="h-5 w-5 fill-current" />
-                    ))}
+                  <div className="relative overflow-hidden">
+                    <img
+                      src={dealer?.coverImage}
+                      alt={dealer?.name}
+                      className="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                   </div>
-                  <span className="ml-3 text-sm text-gray-600 font-medium">
-                    4.9 (89 reviews)
-                  </span>
-                </div>
-                <Link
-                  to="/dealer/2"
-                  className="inline-flex items-center text-blue-600 hover:text-blue-800 font-semibold group-hover:translate-x-1 transition-all duration-300"
-                >
-                  View Details <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </div>
-            </div>
-
-            <div className="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
-              <div className="relative overflow-hidden">
-                <img
-                  src="https://images.pexels.com/photos/1077785/pexels-photo-1077785.jpeg"
-                  alt="Desert Auto Sales"
-                  className="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-              </div>
-              <div className="p-8">
-                <h3 className="text-2xl font-semibold mb-3 text-gray-900">
-                  Desert Auto Sales
-                </h3>
-                <p className="text-gray-600 mb-4 leading-relaxed">
-                  Flexible financing for all credit situations and first-time
-                  buyers
-                </p>
-                <div className="flex items-center mb-6">
-                  <div className="flex text-yellow-400">
-                    {[...Array(4)].map((_, i) => (
-                      <Star key={i} className="h-5 w-5 fill-current" />
-                    ))}
-                    <Star className="h-5 w-5 text-gray-300" />
+                  <div className="p-8">
+                    <h3 className="text-2xl font-semibold mb-3 text-gray-900">
+                      {dealer?.name}
+                    </h3>
+                    <p className="text-gray-600 mb-4 leading-relaxed">
+                      {dealer?.description}
+                    </p>
+                    <div className="flex items-center mb-6">
+                      <div className="flex text-yellow-400">
+                        {[...Array(5)].map((_, i) => (
+                          <Star key={i} className="h-5 w-5 fill-current" />
+                        ))}
+                      </div>
+                      <span className="ml-3 text-sm text-gray-600 font-medium">
+                        4.8 ({dealer?.reviews?.length || 0} reviews)
+                      </span>
+                    </div>
+                    <Link
+                      to={`/dealer/${dealer?._id}`}
+                      className="inline-flex items-center text-blue-600 hover:text-blue-800 font-semibold group-hover:translate-x-1 transition-all duration-300"
+                    >
+                      View Details <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
                   </div>
-                  <span className="ml-3 text-sm text-gray-600 font-medium">
-                    4.5 (156 reviews)
-                  </span>
                 </div>
-                <Link
-                  to="/dealer/3"
-                  className="inline-flex items-center text-blue-600 hover:text-blue-800 font-semibold group-hover:translate-x-1 transition-all duration-300"
-                >
-                  View Details <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </div>
-            </div>
+              ))
+            )}
           </div>
 
           <div className="text-center">
