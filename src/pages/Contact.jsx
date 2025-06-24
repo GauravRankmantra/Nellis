@@ -13,6 +13,7 @@ import {
   Award,
 } from "lucide-react";
 import axios from "axios";
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api/v1/';
 
 const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -42,7 +43,7 @@ const Contact = () => {
 
       // Make the API call to your backend endpoint
       const response = await axios.post(
-        "http://localhost:5000/api/v1/contact",
+        `${API_BASE_URL}contact`,
         payload
       ); // Adjust API endpoint as needed
 
